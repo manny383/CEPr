@@ -1,0 +1,63 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Registrar Carreras</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/carreras/agregar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" required placeholder="Nombre de la carrera" class="form-control">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="siglas">Siglas:</label>
+                    <input type="text" name="siglas" required placeholder="Siglas" class="form-control">
+                </div>
+
+            </div>
+
+            <!--Fila 2-->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="especialidad">Especialidad:</label>
+                    <input type="text" name="especialidad"  requiered placeholder="Especialidad" class="form-control" >
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="creditos">Creditos:</label>
+                    <input type="number" name="creditos" required placeholder="Creditos" class="form-control"  >
+                </div>
+                </div>
+            <br>
+            <center>
+            <button type="submit" style="margin:20px" class="btn btn-success">Guardar</button>
+            <a href="/Carreras" class="btn btn-secondary" style="margin:20px">Regresar</a>
+            </center>
+
+
+        </form>
+        <br>
+</div>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+</div>
+
+
+
+{% endblock%}

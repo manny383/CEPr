@@ -1,0 +1,74 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<!--Formulario-->
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Registrar Coordinador</h2>
+        <h4>Datos escolares</h4>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/Coordinador/agregar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-1 mb-1">
+                    <label for="idUsuario"></label>
+                    <select class="custom-select" style="visibility:hidden" name="usuario" required >
+                        {% for u in usuarios %}
+                        <option selected value="{{u.idUsuario}}" >{{u.nombre }} </option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="idCarrera">Carrera:</label>
+                    <select class="custom-select" name="carrera" required>
+                        <option selected disabled value="">Selecciona...</option>
+                        {% for c in carreras %}
+                        <option value="{{c.idCarrera}}">{{c.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="fechaInicio">Fecha Inicio:</label>
+                    <input type="date" class="form-control" name="inicio" required placeholder="Fecha de Inicio">
+                </div>
+
+                 <div class="col-md-3 mb-3">
+                    <label for="fechaFin">Fecha Fin:</label>
+                    <input type="date" class="form-control" name="fin" required placeholder="Fecha de Inicio">
+                </div>
+            </div>
+
+
+            <br>
+            <center>
+            <button class="btn btn-success"  style="margin:20px" type="submit">Guardar</button>
+
+            </center>
+
+
+        </form>
+    </div>
+ {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+
+</div>
+
+
+{% endblock%}
+

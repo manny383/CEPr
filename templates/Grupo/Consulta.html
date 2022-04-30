@@ -1,0 +1,56 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+    <h2>Consulta Grupos</h2>
+    </center>
+    <br>
+ {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+    <right>
+        <a href="/grupos/nuevo" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+<br>
+
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Periodo</th>
+                <th>Carrera</th>
+                <th>Descripcion</th>
+                <th>Semestre</th>
+                <th>Grupo</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        {% for gpo in grupos %}
+            <tr>
+             <td>{{gpo.idGrupo}}</td>
+             <td>{{gpo.periodos.nombre}}</td>
+             <td>{{gpo.carreras.nombre}}</td>
+                <td>{{gpo.descripcion}}</td>
+             <td>{{gpo.semestre}}</td>
+             <td>{{gpo.grupo}}</td>
+             <td>
+                 <a href="/grupos/ver/{{gpo.idGrupo}}" class="btn btn-info"> Más información</a></td>
+             <td>
+
+             </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+
+
+{% endblock%}

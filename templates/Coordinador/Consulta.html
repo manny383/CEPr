@@ -1,0 +1,57 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+        <h2>Consulta Coordinador</h2>
+    </center>
+    <br>
+
+
+    <right>
+        <a href="/Coordinador/NuevoUsers" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+    <br>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID_Usuario</th>
+                <th>ID_Coordinador</th>
+                <th>Nombre</th>
+                <th>Carrera</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <TH>Estatus</TH>
+                <th>Editar</th>
+                <th></th>
+            </tr>
+        </thead>
+        {% for cor in coordinador %}
+        <tr>
+            <td>{{cor.usuarios.idUsuario}}</td>
+            <td>{{cor.idCoordinador}}</td>
+            <td>{{cor.usuarios.nombre}}</td>
+            <td>{{cor.carreras.nombre}}</td>
+            <td>{{cor.fechaInicio}}</td>
+            <td>{{cor.fechaFin}}</td>
+            <td>{{cor.usuarios.estatus}}</td>
+            <td>
+                <a href="/Coordinador/ver/{{cor.idCoordinador}}" class="btn btn-info"> Más información</a>
+            </td>
+            <td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock%}

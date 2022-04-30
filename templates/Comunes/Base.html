@@ -1,0 +1,115 @@
+{% extends 'bootstrap/base.html'%}
+{% block styles %}
+{{super()}}
+<link href="{{url_for('static',filename='css/estilo.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+{% block scripts %}
+{{super()}}
+{% endblock %}
+<header>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{{url_for('static',filename='imagenes/ITESZ.png')}}" width="100px">
+            </div>
+            <div class="col-md-8">
+                <p4>SISTEMA DE CONTROL ESCOLAR</p4>
+                <br>
+                <p1>INSTITUTO TECNOLÓGICO DE ESTUDIOS SUPERIORES DE Z</p1>
+
+            </div>
+            <div class="col-md">
+                <img src="{{url_for('static',filename='imagenes/TECNM.png')}}" width="150px">
+            </div>
+        </div>
+    </div>
+</header>
+{% block navbar %}
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+
+        <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="/index" style="margin:10px">Home</a></li>
+
+            {%if current_user.is_authenticated and (current_user.is_admin() or current_user.is_coordinador())%}
+            <li class="dropdown">
+                <a href="#" style="margin:10px" class="dropdown-toggle"
+                    data-toggle="dropdown">Usuarios</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/Alumnos/Consulta">Alumnos</a></li>
+                    <li><a href="/Docente/Consulta">Docentes</a></li>
+                    {%if current_user.is_authenticated and current_user.is_admin()%}
+                    <li><a href="/Coordinador/Consulta">Coordinador</a></li>
+                    {%endif%}
+                </ul>
+            {%endif%}
+
+            {%if current_user.is_authenticated and (current_user.is_admin() or current_user.is_coordinador())%}
+            <li class="dropdown">
+                <a href="/usuarios/ingresar" style="margin:10px" class="dropdown-toggle" data-toggle="dropdown">Gestión
+                    Administrativa</a>
+                <ul class="dropdown-menu">
+                    {%if current_user.is_authenticated and current_user.is_admin()%}
+                    <li><a href="/Carreras">Carreras</a></li>
+                    {%endif%}
+                    <li><a href="/Grupos">Grupos</a></li>
+                    <li><a href="/Periodos">Periodos</a></li>
+                </ul>
+            {%endif%}
+
+
+
+            <li><a href="#" style="margin:10px">Horarios</a></li>
+            <li><a href="#" style="margin:10px">Calificaciones</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="/usuarios/ingresar" class="dropdown-toggle" data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-user"></span>{{current_user.nombre}}</a>
+                <ul class="dropdown-menu">
+                    <li><a href="/usuarios/editarPerfil"><span class="glyphicon glyphicon-edit"></span>Editar Perfil</a></li>
+                    <li><a href="/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span>Cerrar Sesión</a></li>
+
+                </ul>
+        </ul>
+    </div>
+
+</nav>
+
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+<footer>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{{url_for('static',filename='imagenes/Ubicacion.png')}}" width="40px">
+            </div>
+            <div class="col-md-8">
+                <p3>Control Escolar Copyright</p3>
+                <br>
+                <p3>Sitio desarrollado por Milenio Software</p3>
+            </div>
+
+            <div class="col-md">
+                <img src="{{url_for('static',filename='imagenes/logo.png')}}" width="150px">
+            </div>
+
+            <div class="col-md-2">
+                <p2>KM 7 Carretera Zamora-La Piedad Michoacán, México</p2>
+            </div>
+
+
+        </div>
+    </div>
+    <br>
+</footer>
+{% endblock %}

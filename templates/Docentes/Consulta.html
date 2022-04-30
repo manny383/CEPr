@@ -1,0 +1,57 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+        <h2>Consulta Docentes</h2>
+    </center>
+    <br>
+
+
+    <right>
+        <a href="/Docentes/NuevoUsers" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+    <br>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID_Usuario</th>
+                <th>No Control</th>
+                <th>Nombre</th>
+                <th>Carrera</th>
+                <th>Escolaridad</th>
+                <th>Especialidad</th>
+                <th>Estatus</th>
+                <th>Editar</th>
+
+            </tr>
+        </thead>
+        {% for doc in docentes %}
+        <tr>
+            <td>{{doc.usuarios.idUsuario}}</td>
+            <td>{{doc.noDocente}}</td>
+            <td>{{doc.usuarios.nombre}}</td>
+            <td>{{doc.carreras.nombre}}</td>
+            <td>{{doc.escolaridad}}</td>
+            <td>{{doc.especialidad}}</td>
+            <td>{{doc.usuarios.estatus}}</td>
+            <td>
+                <a href="/Docentes/ver/{{doc.noDocente}}" class="btn btn-info"> Más información</a>
+            </td>
+            <td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock%}

@@ -1,0 +1,90 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<!--Formulario-->
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Editando perfil de {{current_user.nombre}}</h2>
+           <h4>Datos personales</h4>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/usuarios/guardarPerfil" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+
+
+
+            <div class="form-row">
+                 <div class="col-md-6 mb-3">
+                    <label for="ID">ID:</label>
+                    <input type="number" class="form-control" name="id" required placeholder="id" value="{{current_user.idUsuario}}" readonly>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" required placeholder="Nombre del usuario" value="{{current_user.nombre}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="sexo">Sexo:</label>
+                    <input type="text" class="form-control" name="sexo" required placeholder="Sexo" value="{{current_user.sexo}}" readonly>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" name="telefono" required placeholder="Teléfono" value="{{current_user.telefono}}">
+                </div>
+
+            </div>
+
+            <!--Fila 2-->
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" required placeholder="Email"  value="{{current_user.email}}" readonly>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" class="form-control" name="contraseña" required placeholder="Contraseña"  value="{{current_user.contraseña}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="tipo"  style="visibility:hidden" >Tipo</label>
+                    <input type="text" class="form-control" name="tipo" required placeholder="Tipo" value="{{current_user.tipo}}" readonly>
+                </div>
+                </div>
+
+
+
+
+            <br>
+            <center>
+           <button type="submit"  style="margin:20px" class="btn btn-success">Guardar</button>
+            <a href="/index" class="btn btn-secondary" style="margin:20px">Regresar</a>
+
+            </center>
+
+
+        </form>
+    </div>
+
+
+     {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+
+</div>
+
+
+{% endblock%}

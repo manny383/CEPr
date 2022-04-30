@@ -1,0 +1,104 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Modificar Carreras</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/carreras/guardar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <label for="id">ID:</label>
+                    <input type="number" name="id" required placeholder="Siglas" class="form-control"
+                    value="{{carreras.idCarrera}}" readonly>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" required placeholder="Nombre de la carrera" class="form-control"
+                    value="{{carreras.nombre}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="siglas">Siglas:</label>
+                    <input type="text" name="siglas" required placeholder="Siglas" class="form-control"
+                    value="{{carreras.siglas}}">
+                </div>
+
+            </div>
+
+            <!--Fila 2-->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="especialidad">Especialidad:</label>
+                    <input type="text" name="especialidad"  requiered placeholder="Especialidad" class="form-control"
+                    value="{{carreras.especialidad}}">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="creditos">Creditos:</label>
+                    <input type="number" name="creditos" required placeholder="Creditos" class="form-control"
+                    value="{{carreras.creditos}}">
+                </div>
+                </div>
+            <br>
+            <center>
+            <button type="submit" style="margin:20px" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Eliminar</button>
+            <a href="/Carreras" class="btn btn-secondary" style="margin:20px">Regresar</a>
+            </center>
+
+
+        </form>
+        <br>
+</div>
+
+<!-- Modal Eliminar-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminación de Carreras</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+         ¿Estas seguro de eliminar la carrera: {{carreras.nombre}}?
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <a href="/carreras/eliminar/{{carreras.idCarrera}}" class="btn btn-info">Aceptar</a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+</div>
+
+
+
+
+{% endblock%}

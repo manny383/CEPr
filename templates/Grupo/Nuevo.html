@@ -1,0 +1,74 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<br>
+
+
+<div class="container">
+    <center>
+        <h2>Registrar Grupos</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/grupos/agregar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="periodo">Periodo:</label>
+                    <select class="custom-select" name="periodo" required>
+                        <option selected disabled value="">Selecciona...</option>
+                        {% for p in periodo %}
+                        <option value="{{p.idPeriodo}}">{{p.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="carrera">Carrera:</label>
+                    <select class="custom-select" name="carrera" required>
+                        <option selected disabled value="">Selecciona...</option>
+                        {% for c in carreras %}
+                        <option value="{{c.idCarrera}}">{{c.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="descripcion">Descripción:</label>
+
+                    <input type="text" name="descripcion"  required placeholder="Descripcion" class="form-control" maxlength="50">
+
+                </div>
+
+
+                <div class="col-md-2 mb-3">
+                    <label for="semestre">Semestre:</label>
+                    <input type="number" name="semestre" required placeholder="Semestre (1-9)" class="form-control" min="1", max="9">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="grupo">Grupo:</label>
+                    <input type="Text" name="grupo" required placeholder="Grupo (A-Z)" class="form-control" maxlength="1">
+                </div>
+            </div>
+            <br>
+            <center>
+                <button type="submit" style="margin:20px" class="btn btn-success">Guardar</button>
+                <a href="/Grupos" class="btn btn-secondary" style="margin:20px">Regresar</a>
+            </center>
+        </form>
+        <br>
+    </div>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+</div>
+
+
+{% endblock%}

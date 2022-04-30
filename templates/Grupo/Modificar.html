@@ -1,0 +1,125 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<br>
+
+
+<div class="container">
+    <center>
+        <h2>Modificar Grupo</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/grupos/guardar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-2 mb-3">
+                    <label for="id">ID:</label>
+                    <input type="number" name="id" required placeholder="ID del grupo" class="form-control"
+                        value="{{grupos.idGrupo}}" readonly>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="periodo">Periodo:</label>
+                    <select class="custom-select" name="periodo" required>
+                        <option selected value="{{grupos.idPeriodo}}">{{grupos.periodos.nombre}}</option>
+                        {% for p in periodo %}
+                        <option value="{{p.idPeriodo}}">{{p.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="carrera">Carrera:</label>
+                    <select class="custom-select" name="carrera" required>
+                        <option selected value="{{grupos.idCarrera}}">{{grupos.carreras.nombre}}</option>
+                        {% for c in carreras %}
+                        <option value="{{c.idCarrera}}">{{c.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" name="descripcion" required placeholder="Descripcion" class="form-control"
+                        maxlength="50" value="{{grupos.descripcion}}">
+                </div>
+
+
+                <div class="col-md-2 mb-3">
+                    <label for="semestre">Semestre:</label>
+                    <input type="number" name="semestre" required placeholder="Semestre (1-9)" class="form-control"
+                        min="1" , max="9" value="{{grupos.semestre}}">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="grupo">Grupo:</label>
+                    <input type="Text" name="grupo" required placeholder="Grupo (A-Z)" class="form-control"
+                        maxlength="1" value="{{grupos.grupo}}">
+                </div>
+            </div>
+            <br>
+            <center>
+                <button type="submit" style="margin:20px" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Eliminar</button>
+                <a href="/Grupos" class="btn btn-secondary" style="margin:20px">Regresar</a>
+            </center>
+        </form>
+        <br>
+    </div>
+
+    <!-- Modal Eliminar-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminación de Grupos</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+         ¿Estas seguro de eliminar el grupo {{grupos.descripcion}}?
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <a href="/grupos/eliminar/{{grupos.idGrupo}}" class="btn btn-info">Aceptar</a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+</div>
+
+{% endblock%}

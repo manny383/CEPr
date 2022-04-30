@@ -1,0 +1,52 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+    <h2>Consulta Periodos</h2>
+    </center>
+    <br>
+ {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+    <right>
+        <a href="/periodo/nuevo" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+<br>
+
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Estatus</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        {% for p in periodo %}
+            <tr>
+             <td>{{p.idPeriodo}}</td>
+             <td>{{p.nombre}}</td>
+             <td>{{p.fechaInicio}}</td>
+             <td>{{p.fechaFin}}</td>
+             <td>{{p.estatus}}</td>
+             <td>
+
+               <a href="/periodos/ver/{{p.idPeriodo}}" class="btn btn-info"> Más información</a>
+
+             </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock%}

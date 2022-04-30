@@ -1,0 +1,10 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<div class="container text-center">
+<h2>¡¡Error, recurso no encontrado!!</h2>
+    <br>
+<img src="{{url_for('static',filename='imagenes/error-404.jpg')}}" class="img-rounded">
+</div>
+<br>
+{% endblock%}

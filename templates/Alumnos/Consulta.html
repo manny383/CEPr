@@ -1,0 +1,55 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+        <h2>Consulta Alumnos</h2>
+    </center>
+    <br>
+
+
+    <right>
+        <a href="/Alumnos/NuevoUsers" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+    <br>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID_Usuario</th>
+                <th>No Control</th>
+                <th>Nombre</th>
+                <th>Carrera</th>
+                <th>Año Ingreso</th>
+                <th>Estatus</th>
+                <th>Editar</th>
+                <th></th>
+            </tr>
+        </thead>
+        {% for aos in alumnos %}
+        <tr>
+            <td>{{aos.usuarios.idUsuario}}</td>
+            <td>{{aos.noControl}}</td>
+            <td>{{aos.usuarios.nombre}}</td>
+            <td>{{aos.carreras.nombre}}</td>
+            <td>{{aos.anioIngreso}}</td>
+            <td>{{aos.usuarios.estatus}}</td>
+            <td>
+                <a href="/Alumnos/ver/{{aos.noControl}}" class="btn btn-info"> Más información</a>
+            </td>
+            <td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock%}

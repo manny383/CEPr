@@ -1,0 +1,94 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<!--Formulario-->
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Registrar Docentes</h2>
+        <h4>Datos escolares</h4>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/Docentes/agregar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-1 mb-1">
+                    <label for="idUsuario"></label>
+                    <select class="custom-select" style="visibility:hidden" name="usuario" required >
+                        {% for u in usuarios %}
+                        <option selected value="{{u.idUsuario}}" >{{u.nombre }} </option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="idCarrera">Carrera:</label>
+                    <select class="custom-select" name="carrera" required>
+                        <option selected disabled value="">Selecciona...</option>
+                        {% for c in carreras %}
+                        <option value="{{c.idCarrera}}">{{c.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="añoIngreso">Año de Ingreso.</label>
+                    <input type="number" class="form-control" name="anioIngreso" required placeholder="Año de ingreso" min="1985", max="2021">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="escolaridad">Escolaridad:</label>
+                    <select class="custom-select" name="escolaridad" required>
+                        <option selected disabled value="">Selecciona...</option>
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Maestría">Maestria</option>
+                        <option value="Doctorado">Doctorado</option>
+
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-5 mb-3">
+                    <label for="especialidad">Especialidad:</label>
+                    <input type="text" class="form-control" name="especialidad" required placeholder="Especialidad" maxlength="100">
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    <label for="cedula">Cedula Profesional:</label>
+                    <input type="text" class="form-control" name="cedula" required placeholder="Cédula Profesional" maxlength="10">
+                </div>
+            </div>
+
+
+
+
+            <br>
+            <center>
+            <button class="btn btn-success"  style="margin:20px" type="submit">Guardar</button>
+
+            </center>
+
+
+        </form>
+    </div>
+ {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+
+</div>
+
+
+{% endblock%}
+

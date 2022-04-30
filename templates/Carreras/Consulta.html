@@ -1,0 +1,50 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+<div class="container">
+    <center>
+    <h2>Consulta Carreras</h2>
+    </center>
+    <br>
+ {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+    <right>
+        <a href="/carreras/nuevo" style="margin:20px" class="btn btn-success">Registrar</a>
+    </right>
+<br>
+
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Siglas</th>
+                <th>Especialidad</th>
+                <th>Creditos</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        {% for carr in carreras %}
+            <tr>
+             <td>{{carr.idCarrera}}</td>
+             <td>{{carr.nombre}}</td>
+             <td>{{carr.siglas}}</td>
+             <td>{{carr.especialidad}}</td>
+             <td>{{carr.creditos}}</td>
+             <td>
+                 <a href="/carreras/ver/{{carr.idCarrera}}" class="btn btn-info"> Más información</a>
+             </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock%}

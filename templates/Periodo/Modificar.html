@@ -1,0 +1,100 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<br>
+
+
+<div class="container">
+    <center>
+    <h2>Modifcar Periodo</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/periodos/guardar" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="id">ID:</label>
+                    <input type="number" name="idPeriodo" required placeholder="ID Periodo" class="form-control" value="{{periodo.idPeriodo}}" readonly>
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" required placeholder="Nombre del periodo" class="form-control" value="{{periodo.nombre}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="fechaInico">Inicia:</label>
+                    <input type="Date" name="inicio" required placeholder="Fecha de Inicio" class="form-control" value="{{periodo.fechaInicio}}">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="fechaFin">Finaliza:</label>
+                    <input type="Date" name="finaliza"  requiered placeholder="Fecha de Fin" class="form-control" value="{{periodo.fechaFin}}" >
+                </div>
+                <div class="col-md-3 mb-3">
+                    {% if periodo.estatus==True %}
+                    <label>Estatus:</label>
+                    <input type="checkbox" name="estatus" checked value="True">
+                    {% else %}
+                    <label>Estatus:</label>
+                    <br>
+                    <input type="checkbox" name="estatus" value="True">
+                    {% endif %}
+                </div>
+            </div>
+
+            <br>
+            <center>
+            <button type="submit" style="margin:20px" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Eliminar</button>
+            <a href="/Periodos" class="btn btn-secondary" style="margin:20px">Regresar</a>
+            </center>
+
+
+        </form>
+        <br>
+
+        <!-- Modal Eliminar-->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminación de Periodos</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+         ¿Estas seguro de eliminar el periodo: {{periodo.nombre}}?
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <a href="/periodos/eliminar/{{periodo.idPeriodo}}" class="btn btn-info">Aceptar</a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+</div>
+
+
+
+{% endblock%}

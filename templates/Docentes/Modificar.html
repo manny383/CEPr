@@ -1,0 +1,173 @@
+{% extends 'comunes/Base.html' %}
+{% block content %}
+
+<!--Formulario-->
+<br>
+
+
+<div class="container">
+    <center>
+        <h2>Modificar Docentes</h2>
+    </center>
+    <br>
+
+    <div class="well">
+        <form action="/Docentes/guardar" method="post" enctype="multipart/form-data" >
+
+            <!--Fila 1-->
+            <div class="form-row">
+                <div class="col-md-2 mb-3">
+                    <label for="nombre">ID:</label>
+                    <input type="number" class="form-control" name="usuario" required placeholder="ID de Usuario"
+                        readonly value="{{docentes.idUsuario}}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" required placeholder="Nombre del usuario"
+                        value="{{docentes.usuarios.nombre}}">
+                </div>
+
+                <div class="col-md-1 mb-3">
+                    <label for="sexo">Sexo:</label>
+                    <select class="custom-select" name="sexo" required>
+                        {% if docentes.usuarios.sexo=='M' %}
+
+                        <option value="H">Hombre</option>
+                        <option selected value="M">Mujer</option>
+
+                        {% else %}
+                        <option selected value="H">Hombre</option>
+                        <option value="M">Mujer</option>
+                        {% endif %}
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" name="telefono" required placeholder="Teléfono"
+                        value="{{docentes.usuarios.telefono}}">
+                </div>
+
+
+            </div>
+
+            <!--Fila 2-->
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" required placeholder="Email" ,
+                        value="{{docentes.usuarios.email}}" maxlength="100">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" class="form-control" name="contraseña" required placeholder="Constraseña"
+                        maxlength="20" value="{{docentes.usuarios.contraseña}}">
+                </div>
+
+                <div class="col-md-2 mb-3">
+                    <label for="tipo">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" required placeholder="Tipo" maxlength="20"
+                        value="{{docentes.usuarios.tipo}}" readonly>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    {% if docentes.usuarios.estatus==True %}
+                    <label>Estatus:</label>
+                    <br>
+                    <input type="checkbox" name="estatus" checked value="True">
+                    {% else %}
+                    <label>Estatus:</label>
+                    <br>
+                    <input type="checkbox" name="estatus" value="True">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-2 mb-3">
+                    <label for="noControl">Numero de Control</label>
+                    <input type="number" class="form-control" name="noDocente" required placeholder="Numero de Docente"
+                        readonly value="{{docentes.noDocente}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="carrera">Carrera</label>
+                    <select class="custom-select" name="carrera" required>
+                        <option selected value="{{docentes.idCarrera}}">{{docentes.carreras.nombre}}</option>
+                        {% for c in carreras %}
+                        <option value="{{c.idCarrera}}">{{c.nombre}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label for="anioIngreso">Año de ingreso</label>
+                    <input type="number" class="form-control" name="anioIngreso" required placeholder="Año de ingreso"
+                        min="2000" , max="2021" value="{{docentes.anioIngreso}}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="escolaridad">Escolaridad:</label>
+                    <select class="custom-select" name="escolaridad" required>
+                        {% if docentes.escolaridad=='Licenciatura' %}
+                        <option selected value="Licenciatura">Licenciatura</option>
+                        <option value="Maestría">Maestria</option>
+                        <option value="Doctorado">Doctorado</option>
+                        {%endif %}
+                        {% if docentes.escolaridad=='Maestría' %}
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option selected value="Maestría">Maestria</option>
+                        <option value="Doctorado">Doctorado</option>
+                        {%endif %}
+                        {% if docentes.escolaridad=='Doctorado' %}
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Maestría">Maestria</option>
+                        <option selected value="Doctorado">Doctorado</option>
+                        {%endif %}
+
+
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="especialidad">Especialidad</label>
+                    <input type="text" class="form-control" name="especialidad" required placeholder="Especialidad"
+                           value="{{docentes.especialidad}}">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="cedula">Cedula Profresional</label>
+                    <input type="text" class="form-control" name="cedula" required placeholder="Cédula Profesional"
+                           maxlength="10" value="{{docentes.cedula}}">
+                </div>
+
+            </div>
+
+
+
+            <br>
+            <center>
+                <button class="btn btn-success" style="margin:20px" type="submit">Guardar</button>
+                <a href="/Docente/Consulta" class="btn btn-secondary" style="margin:20px">Regresar</a>
+
+            </center>
+
+
+        </form>
+    </div>
+
+
+    {% if get_flashed_messages() %}
+    {% for m in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{m}}</strong> .
+    </div>
+    {% endfor %}
+    {% endif%}
+
+</div>
+
+
+{% endblock%}
